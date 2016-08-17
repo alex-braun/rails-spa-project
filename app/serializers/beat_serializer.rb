@@ -1,3 +1,3 @@
 class BeatSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :kick, :snare, :hatClose, :hatOpen, :clap
 end
