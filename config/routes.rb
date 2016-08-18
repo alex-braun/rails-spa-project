@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :beats, except: [:new, :edit]
   resources :patterns, except: [:new, :edit]
   resources :beats, except: [:new, :edit]
   resources :examples, except: [:new, :edit]
