@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817224832) do
+ActiveRecord::Schema.define(version: 20160817203508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,11 +20,13 @@ ActiveRecord::Schema.define(version: 20160817224832) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "kick"
-    t.string   "snare"
-    t.string   "hatClose"
-    t.string   "hatOpen"
-    t.string   "clap"
+  end
+
+  create_table "doctors", force: :cascade do |t|
+    t.string   "given_name"
+    t.string   "surname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "examples", force: :cascade do |t|
@@ -42,6 +44,18 @@ ActiveRecord::Schema.define(version: 20160817224832) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "patients", force: :cascade do |t|
+    t.string   "given_name"
+    t.string   "surname"
+    t.string   "born_on"
+    t.string   "gender"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "doctor_id"
+  end
+
+  add_index "patients", ["doctor_id"], name: "index_patients_on_doctor_id", using: :btree
 
   create_table "recipe_ingredients", force: :cascade do |t|
     t.integer  "recipe_id"
@@ -72,6 +86,7 @@ ActiveRecord::Schema.define(version: 20160817224832) do
   add_index "users", ["token"], name: "index_users_on_token", unique: true, using: :btree
 
   add_foreign_key "examples", "users"
+  add_foreign_key "patients", "doctors"
   add_foreign_key "recipe_ingredients", "ingredients"
   add_foreign_key "recipe_ingredients", "recipes"
 end
