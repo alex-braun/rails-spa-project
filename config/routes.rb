@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :patterns, except: [:new, :edit]
   resources :beats, except: [:new, :edit]
   resources :examples, except: [:new, :edit]
   post '/sign-up' => 'users#signup'
@@ -7,4 +8,5 @@ Rails.application.routes.draw do
   patch '/change-password/:id' => 'users#changepw'
   resources :users, only: [:index, :show]
 
+  resources :patterns, except: [:new, :edit]
 end
