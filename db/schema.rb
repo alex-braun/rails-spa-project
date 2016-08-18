@@ -11,16 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818141425) do
+ActiveRecord::Schema.define(version: 20160818152526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "beats", force: :cascade do |t|
-    t.string   "name"
+    t.boolean  "kick"
+    t.boolean  "snare"
+    t.boolean  "hatClose"
+    t.boolean  "hatOpen"
+    t.boolean  "clap"
+    t.integer  "pattern_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "beats", ["pattern_id"], name: "index_beats_on_pattern_id", using: :btree
 
   create_table "doctors", force: :cascade do |t|
     t.string   "given_name"
@@ -94,6 +101,7 @@ ActiveRecord::Schema.define(version: 20160818141425) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["token"], name: "index_users_on_token", unique: true, using: :btree
 
+  add_foreign_key "beats", "patterns"
   add_foreign_key "examples", "users"
   add_foreign_key "patients", "doctors"
   add_foreign_key "patterns", "users"
