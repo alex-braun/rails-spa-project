@@ -18,8 +18,8 @@ curl --include --request POST http://localhost:3000/patterns \
   }'
 
 
-    curl --include --request GET http://localhost:3000/beats/1 \
-  --header "Authorization: Token token=BAhJIiU1ZTE5NTVjMzEyZDUzY2M5NDQxNWMxYzUxMzMwNDJiOQY6BkVG--e35a581e559c899b32127afc81353dcf2ed2265c" \
+curl --include --request GET "http://localhost:3000/beats/1" \
+  --header "Authorization: Token token=BAhJIiVhY2I5ZTUxZDJjYjQ5MTcyNjBlZjdiY2FlZGQ2YzkwNgY6BkVG--55840e7e428e31cb0c0d8550456d761da871cc20" \
 
-  curl --include --request GET "http://localhost:3000/users" \
-    --header "Authorization: Token token=BAhJIiVhODM0MmE5MWIwNzdhYjBlMGNhZWMzODMwZDMzY2QzYwY6BkVG--5ff75a92baa657fdbc6aea42216b" \
+curl --include --request GET "http://localhost:3000/users/1" \
+  --header "Authorization: Token token=BAhJIiVhY2I5ZTUxZDJjYjQ5MTcyNjBlZjdiY2FlZGQ2YzkwNgY6BkVG--55840e7e428e31cb0c0d8550456d761da871cc20" \
