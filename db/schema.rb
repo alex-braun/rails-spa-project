@@ -30,13 +30,6 @@ ActiveRecord::Schema.define(version: 20160818153538) do
 
   add_index "beats", ["pattern_id"], name: "index_beats_on_pattern_id", using: :btree
 
-  create_table "doctors", force: :cascade do |t|
-    t.string   "given_name"
-    t.string   "surname"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "examples", force: :cascade do |t|
     t.text     "text",       null: false
     t.integer  "user_id",    null: false
@@ -46,25 +39,6 @@ ActiveRecord::Schema.define(version: 20160818153538) do
 
   add_index "examples", ["user_id"], name: "index_examples_on_user_id", using: :btree
 
-  create_table "ingredients", force: :cascade do |t|
-    t.string   "name"
-    t.string   "unit"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "patients", force: :cascade do |t|
-    t.string   "given_name"
-    t.string   "surname"
-    t.string   "born_on"
-    t.string   "gender"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "doctor_id"
-  end
-
-  add_index "patients", ["doctor_id"], name: "index_patients_on_doctor_id", using: :btree
-
   create_table "patterns", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -73,23 +47,6 @@ ActiveRecord::Schema.define(version: 20160818153538) do
   end
 
   add_index "patterns", ["user_id"], name: "index_patterns_on_user_id", using: :btree
-
-  create_table "recipe_ingredients", force: :cascade do |t|
-    t.integer  "recipe_id"
-    t.integer  "ingredient_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "recipe_ingredients", ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id", using: :btree
-  add_index "recipe_ingredients", ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id", using: :btree
-
-  create_table "recipes", force: :cascade do |t|
-    t.string   "name"
-    t.boolean  "family_favorite"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false
@@ -104,8 +61,5 @@ ActiveRecord::Schema.define(version: 20160818153538) do
 
   add_foreign_key "beats", "patterns"
   add_foreign_key "examples", "users"
-  add_foreign_key "patients", "doctors"
   add_foreign_key "patterns", "users"
-  add_foreign_key "recipe_ingredients", "ingredients"
-  add_foreign_key "recipe_ingredients", "recipes"
 end
