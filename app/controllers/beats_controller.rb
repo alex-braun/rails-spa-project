@@ -4,7 +4,8 @@ class BeatsController < ApplicationController
   # GET /beats
   # GET /beats.json
   def index
-    @beats = Beat.all
+    # @beats = Beat.all
+    @beats = Pattern.find(params[:pattern_id]).beats
 
     render json: @beats
   end
@@ -18,7 +19,7 @@ class BeatsController < ApplicationController
   # POST /beats
   # POST /beats.json
   def create
-    @beat = Beat.new(beat_params)
+    @beats = current_user.beats.build(beat_params)
 
     if @beat.save
       render json: @beat, status: :created, location: @beat
