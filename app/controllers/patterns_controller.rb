@@ -1,10 +1,11 @@
-class PatternsController < ApplicationController
+class PatternsController < OpenReadController
   before_action :set_pattern, only: [:show, :update, :destroy]
 
   # GET /patterns
   # GET /patterns.json
   def index
-    @patterns = Pattern.all
+    # @patterns = current_user.patterns
+    @patterns = User.find(params[:user_id]).patterns
 
     render json: @patterns
   end
@@ -13,12 +14,13 @@ class PatternsController < ApplicationController
   # GET /patterns/1.json
   def show
     render json: @pattern
+    # Pattern.find(params[:id])
   end
 
   # POST /patterns
   # POST /patterns.json
   def create
-    @pattern = Pattern.new(pattern_params)
+    @pattern = current_user.patterns.build(pattern_params)
 
     if @pattern.save
       render json: @pattern, status: :created, location: @pattern
@@ -50,10 +52,11 @@ class PatternsController < ApplicationController
   private
 
     def set_pattern
-      @pattern = Pattern.find(params[:id])
+      # @pattern = Pattern.find(params[:id])
+      @pattern = current_user.patterns.find(params[:id])
     end
 
     def pattern_params
-      params.require(:pattern).permit(:name, :user_id)
+      params.require(:pattern).permit(:name)
     end
 end
